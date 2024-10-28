@@ -12,7 +12,7 @@ fi
 # Installs dependencies for Anki.
 sudo apt install libxcb-xinerama0 libxcb-cursor0 zstd
 
-# Moves shell to the Downloads directory and grabs the latest Anki release via the wget utility
+# Moves shell to the Downloads directory and grabs the latest Anki release via the wget utility.
 cd ~/Downloads && wget https://github.com/ankitects/anki/releases/download/"$current_anki_release"/anki-"$current_anki_release"-linux-qt6.tar.zst
 
 # Untars the file, changes directory to execute the installation shell script.
