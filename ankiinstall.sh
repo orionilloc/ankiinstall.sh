@@ -36,4 +36,4 @@ cd ~/Downloads && wget https://github.com/ankitects/anki/releases/download/"$cur
 # Untars the file, changes directory to installation files, executes the installation shell script.
 tar xaf anki-"$current_anki_release"-linux-qt6.tar.zst && cd anki-"$current_anki_release"-linux-qt6 && sudo ./install.sh
 
-echo "Anki installation complete!"
+echo "Anki installation is complete!"
