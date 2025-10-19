@@ -27,7 +27,7 @@ if [[ $? -ne 0 ]]; then
     exit
 fi
 
-# Check if the download was successful
+# Check if the download was successful.
 if [[ ! -f anki-"$current_anki_release"-linux-qt6.tar.zst ]]; then
     echo "Downloaded file not found."
     exit
@@ -43,7 +43,7 @@ fi
 
 cd anki-"$current_anki_release"-linux-qt6
 
-# Run the installation script if it exists
+# Run the installation script if it exists.
 if [[ -f install.sh ]]; then
     sudo ./install.sh
     if [[ $? -ne 0 ]]; then
