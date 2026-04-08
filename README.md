@@ -1,4 +1,4 @@
-## Anki Linux Deployer
+## ankiinstall.sh
 
 This Bash script automates the end-to-end process of installing the latest version of **Anki** on a Debian-based Linux system (like Ubuntu or Debian). It handles dependency resolution, version fetching, and execution of the official installation binaries.
 
