@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # This unsightly piece of command substitution uses curl to find the latest version of Anki based upon repository tags found in the HTTP response (which seem to be robust and accurate for now). It takes way too long, and there is certainly a better way. Whitespace and newline characters are removed so that output can be inserted into additional commands.
-current_anki_release=$(curl -s https://github.com/ankitects/anki/releases/latest 2>&1 | grep "location" | cut -d ' ' -f 3 | awk -F / '{print $NF}' | tr -d '\r')
-
+current_anki_release=$(curl -s https://api.github.com/repos/ankitects/anki/releases/latest | grep '"tag_name"' | cut -d '"' -f 4 | cut -d '.' -f 1,2)
+  
 # Ensure that Anki isn't already installed
 if command -v anki &> /dev/null; then
     echo "Anki is already installed on this machine!"
