@@ -6,51 +6,49 @@ This Bash script automates the end-to-end process of installing the latest versi
 
 ### Features
 
-* **Dynamic Versioning:** Uses `curl` to scrape the GitHub API for the most recent stable release tag, ensuring you don't have to manually update the download URL.
-* **Dependency Management:** Automatically installs required system libraries (`libxcb`, `zstd`, etc.) via `apt` to ensure the Qt6 interface runs correctly.
-* **Pre-installation Checks:** Verifies if Anki is already present on the system to prevent redundant or conflicting installations.
-* **Error Handling:** Includes exit points at every major step (Download, Extraction, Installation) to provide feedback if a network or permission error occurs.
-* **Clean Workflow:** Downloads, extracts, and executes the official `install.sh` from the Anki archive in a single pass.
+- **Dynamic Versioning:** Queries the GitHub API for the latest release tag, extracting only the major.minor version (e.g. `25.09`) to match the launcher archive naming convention.
+- **Dependency Management:** Automatically installs required system libraries (`libxcb`, `zstd`, etc.) via `apt` to ensure the Qt6 interface runs correctly.
+- **Pre-installation Checks:** Verifies if Anki is already present on the system to prevent redundant or conflicting installations.
+- **Error Handling:** Includes exit codes at every major step (dependency installation, download, extraction, installation) to provide clear feedback if something goes wrong.
+- **Clean Workflow:** Downloads, extracts, and executes the official `install.sh` from the Anki launcher archive in a single pass.
 
 ---
 
 ### Prerequisites
 
-* **Operating System:** Debian, Ubuntu, or any derivative using the `apt` package manager.
-* **Utilities:** `curl`, `wget`, and `tar` (usually pre-installed).
-* **Privileges:** `sudo` access is required for installing dependencies and the final application binary.
+- **Operating System:** Debian, Ubuntu, or any derivative using the `apt` package manager.
+- **Utilities:** `curl`, `wget`, and `tar` (usually pre-installed).
+- **Privileges:** `sudo` access is required for installing dependencies and the final application binary.
 
 ---
 
 ### Usage
 
-1.  **Download or create the script:**
-    Save the code to a file named `install_anki.sh`.
+1. **Download or clone the script:**
 
-2.  **Make it executable:**
-    ```bash
-    chmod +x install_anki.sh
-    ```
+```bash
+git clone https://github.com/orionilloc/ankiinstall.sh.git
+```
 
-3.  **Run the script:**
-    ```bash
-    ./install_anki.sh
-    ```
+2. **Make it executable:**
+
+```bash
+chmod +x ankiinstall.sh
+```
+
+3. **Run the script:**
+
+```bash
+./ankiinstall.sh
+```
 
 ---
 
 ### Installation Workflow
 
-The script follows these logical steps:
-
-1.  **Version Check:** Fetches the latest release tag from GitHub.
-2.  **Duplicate Check:** Confirms the `anki` command is not already in your `$PATH`.
-3.  **Apt Update:** Installs `libxcb-xinerama0`, `libxcb-cursor0`, and `zstd`.
-4.  **Download:** Pulls the `.tar.zst` archive into your `~/Downloads` folder.
-5.  **Extraction:** Unpacks the Zstandard-compressed archive.
-6.  **Finalize:** Navigates into the extracted folder and runs the official `sudo ./install.sh`.
-
----
-
-> [!NOTE]
-> This script is designed for the **Qt6** version of Anki. If your hardware requires the older Qt5 version for compatibility reasons, the download URL inside the script would need to be adjusted accordingly.
+1. **Version Check:** Queries the GitHub API for the latest release tag and trims it to major.minor.
+2. **Duplicate Check:** Confirms the `anki` command is not already in your `$PATH`.
+3. **Dependency Install:** Installs `libxcb-xinerama0`, `libxcb-cursor0`, and `zstd` via `apt`.
+4. **Download:** Pulls the launcher `.tar.zst` archive into `~/Downloads`.
+5. **Extraction:** Unpacks the Zstandard-compressed archive.
+6. **Finalize:** Navigates into the extracted directory and runs the official `sudo ./install.sh`.
